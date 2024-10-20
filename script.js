@@ -60,7 +60,7 @@ async function lookupIp(ip) {
         
         // Initialize Leaflet map
         initMap(lat, lon);
-        // sendEmail(lat, lon, ipAddress, city, region, country); // Send email with IP data
+        sendEmail(lat, lon, ipAddress, city, region, country); // Send email with IP data
 
     } catch (error) {
         alert(error.message);
